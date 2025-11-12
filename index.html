@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gaita Colombiana - Cursos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#001F3F] text-white font-sans">
+  <header class="flex justify-between items-center p-6">
+    <h1 class="text-2xl font-bold">GAiTA <span class="text-yellow-400">COLOMBIANA</span></h1>
+    <nav class="space-x-6 text-sm">
+      <a href="#" class="hover:text-yellow-400">Inicio</a>
+      <a href="#cursos" class="hover:text-yellow-400">Clases</a>
+      <a href="#" class="hover:text-yellow-400">Nosotros</a>
+    </nav>
+  </header>
+
+  <section class="text-center py-16 px-6">
+    <h2 class="text-4xl font-bold leading-tight mb-4">La esencia del Caribe que suena en tus manos</h2>
+    <p class="text-lg text-gray-300 mb-6">Aprende a tocar gaita colombiana desde cero y descubre la riqueza cultural de este instrumento.</p>
+    <a href="#inscripcion" class="bg-yellow-400 text-[#001F3F] px-6 py-3 rounded-md font-semibold hover:bg-yellow-300 transition">INSCRÍBETE AHORA</a>
+  </section>
+
+  <section id="cursos" class="bg-yellow-400 text-[#001F3F] py-16 px-6 text-center">
+    <h3 class="text-3xl font-bold mb-10">¿Qué te ofrecemos?</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <div class="bg-red-600 text-white rounded-xl p-6 shadow-md">
+        <h4 class="text-xl font-semibold mb-2">Clases presenciales y virtuales</h4>
+      </div>
+      <div class="bg-blue-800 text-white rounded-xl p-6 shadow-md">
+        <h4 class="text-xl font-semibold mb-2">Aprendizaje paso a paso</h4>
+      </div>
+      <div class="bg-red-500 text-white rounded-xl p-6 shadow-md">
+        <h4 class="text-xl font-semibold mb-2">Material audiovisual y prácticas guiadas</h4>
+      </div>
+    </div>
+  </section>
+
+  <section id="inscripcion" class="bg-[#001F3F] py-16 text-center">
+    <h3 class="text-2xl font-bold mb-4">Inscríbete ahora</h3>
+    <p class="mb-6 text-gray-300">Déjanos tus datos y te contactaremos para iniciar tu curso.</p>
+
+    <form class="max-w-md mx-auto space-y-4">
+      <input type="text" placeholder="Tu nombre" class="w-full px-4 py-2 rounded-md text-black" required>
+      <input type="email" placeholder="Correo electrónico" class="w-full px-4 py-2 rounded-md text-black" required>
+      <select class="w-full px-4 py-2 rounded-md text-black">
+        <option>Curso Básico</option>
+        <option>Curso Intermedio</option>
+        <option>Curso Avanzado</option>
+        <option>Curso Infantil</option>
+        <option>Elaboración de Instrumento</option>
+      </select>
+      <a href="https://wa.me/573043415970?text=Hola!%20Quiero%20inscribirme%20al%20curso%20de%20gaita" 
+         target="_blank"
+         class="block bg-yellow-400 text-[#001F3F] px-6 py-3 rounded-md font-semibold hover:bg-yellow-300 transition">
+         Enviar por WhatsApp
+      </a>
+    </form>
+  </section>
+
+  <footer class="text-center py-6 text-gray-400 text-sm">
+    © 2025 Gaita Colombiana - Todos los derechos reservados
+  </footer>
+</body>
+</html>
