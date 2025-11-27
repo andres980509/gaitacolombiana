@@ -1,66 +1,450 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gaita Colombiana - Cursos</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Efecto de las tarjetas que giran */
+    .flip-card {
+      perspective: 1000px;
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      transform-style: preserve-3d;
+      transition: transform 0.8s;
+    }
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+    }
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
+
+    /* Animación del menú móvil */
+    .slide-down {
+      animation: slideDown 0.3s ease-out forwards;
+    }
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
+
 <body class="bg-[#001F3F] text-white font-sans">
-  <header class="flex justify-between items-center p-6">
-    <h1 class="text-2xl font-bold">GAiTA <span class="text-yellow-400">COLOMBIANA</span></h1>
-    <nav class="space-x-6 text-sm">
-      <a href="#" class="hover:text-yellow-400">Inicio</a>
-      <a href="#cursos" class="hover:text-yellow-400">Clases</a>
-      <a href="#" class="hover:text-yellow-400">Nosotros</a>
-    </nav>
+
+  <!-- HEADER -->
+  <header class="bg-[#001F3F] text-white shadow-md">
+    <div class="max-w-6xl mx-auto flex items-center justify-between p-4 md:p-6">
+      <!-- Logo -->
+      <a href="#" class="flex items-center space-x-3">
+        <img src="img/logo.png" alt="Logo Gaita Colombiana" class="h-16 w-auto object-contain" />
+      </a>
+
+      <!-- Botón hamburguesa (solo móvil) -->
+      <button id="menu-btn" class="md:hidden focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
+
+      <!-- Menú principal -->
+      <nav id="menu" class="hidden md:flex space-x-4 md:space-x-6 text-sm md:text-base font-medium">
+        <a href="#" class="hover:text-yellow-400 transition">Inicio</a>
+        <a href="#cursos" class="hover:text-yellow-400 transition">¿ que te ofrecemos ?</a>
+           <a href="#niveles" class="hover:text-yellow-400 transition">Cursos</a>
+        <a href="#tipos-de-gaitas" class="hover:text-yellow-400 transition">Gaitas</a>
+        <a href="#inscripcion" class="hover:text-yellow-400 transition">Inscripción</a>
+          
+      </nav>
+    </div>
+
+    <!-- Menú móvil desplegable -->
+    <div id="mobile-menu" class="hidden flex-col bg-[#001A33] text-center space-y-3 py-4 md:hidden">
+      <a href="#" class="block hover:text-yellow-400 transition">Inicio</a>
+      <a href="#cursos" class="block hover:text-yellow-400 transition">¿ que te ofrecemos ?</a>
+         <a href="#niveles" class="block hover:text-yellow-400 transition">Cursos</a>  
+      <a href="#tipos-de-gaitas" class="block hover:text-yellow-400 transition">Gaitas</a>
+      <a href="#inscripcion" class="block hover:text-yellow-400 transition">Inscripción</a>
+  
+    </div>
   </header>
 
-  <section class="text-center py-16 px-6">
-    <h2 class="text-4xl font-bold leading-tight mb-4">La esencia del Caribe que suena en tus manos</h2>
-    <p class="text-lg text-gray-300 mb-6">Aprende a tocar gaita colombiana desde cero y descubre la riqueza cultural de este instrumento.</p>
-    <a href="#inscripcion" class="bg-yellow-400 text-[#001F3F] px-6 py-3 rounded-md font-semibold hover:bg-yellow-300 transition">INSCRÍBETE AHORA</a>
+  <!-- HERO -->
+  <section class="flex flex-col md:flex-row items-center justify-between py-16 px-6 max-w-6xl mx-auto gap-8">
+    <div class="md:w-1/2 text-center md:text-left">
+      <h2 class="text-4xl font-bold leading-tight mb-4">La esencia del Caribe que suena en tus manos</h2>
+      <p class="text-lg text-gray-300 mb-6">Aprende a tocar gaita colombiana desde cero y descubre la riqueza cultural de este instrumento.</p>
+      <a href="#inscripcion" class="bg-yellow-400 text-[#001F3F] px-6 py-3 rounded-md font-semibold hover:bg-yellow-300 transition">
+        INSCRÍBETE AHORA
+      </a>
+    </div>
+
+    <div class="md:w-1/2 flex justify-center">
+      <img src="img/img-1.png" alt="Gaita Colombiana" class="max-w-xs md:max-w-md rounded-lg shadow-lg" />
+    </div>
   </section>
 
+  <!-- CURSOS -->
   <section id="cursos" class="bg-yellow-400 text-[#001F3F] py-16 px-6 text-center">
     <h3 class="text-3xl font-bold mb-10">¿Qué te ofrecemos?</h3>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-      <div class="bg-red-600 text-white rounded-xl p-6 shadow-md">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+      <div class="bg-red-600 text-white rounded-xl p-6 shadow-md flex flex-col items-center">
+        <i data-lucide="video" class="w-12 h-12 mb-3"></i>
         <h4 class="text-xl font-semibold mb-2">Clases presenciales y virtuales</h4>
+        <p class="text-sm text-gray-100">Aprende desde cualquier lugar, a tu ritmo.</p>
       </div>
-      <div class="bg-blue-800 text-white rounded-xl p-6 shadow-md">
+
+      <div class="bg-blue-800 text-white rounded-xl p-6 shadow-md flex flex-col items-center">
+        <i data-lucide="book-open" class="w-12 h-12 mb-3"></i>
         <h4 class="text-xl font-semibold mb-2">Aprendizaje paso a paso</h4>
+        <p class="text-sm text-gray-100">Domina la gaita con un método claro y progresivo.</p>
       </div>
-      <div class="bg-red-500 text-white rounded-xl p-6 shadow-md">
+
+      <div class="bg-red-500 text-white rounded-xl p-6 shadow-md flex flex-col items-center">
+        <i data-lucide="play-circle" class="w-12 h-12 mb-3"></i>
         <h4 class="text-xl font-semibold mb-2">Material audiovisual y prácticas guiadas</h4>
+        <p class="text-sm text-gray-100">Videos, audios y ejercicios diseñados para ti.</p>
+      </div>
+
+      <div class="bg-green-700 text-white rounded-xl p-6 shadow-md flex flex-col items-center animate-pulse">
+        <i data-lucide="gamepad-2" class="w-12 h-12 mb-3"></i>
+        <h4 class="text-xl font-semibold mb-2">🚀 Próximamente: Plataforma de juegos</h4>
+        <p class="text-sm text-gray-100">Aprende jugando con nuestra nueva experiencia de gamificación.</p>
       </div>
     </div>
   </section>
 
-  <section id="inscripcion" class="bg-[#001F3F] py-16 text-center">
-    <h3 class="text-2xl font-bold mb-4">Inscríbete ahora</h3>
-    <p class="mb-6 text-gray-300">Déjanos tus datos y te contactaremos para iniciar tu curso.</p>
+  <!-- TIPOS DE GAITAS -->
+  <section id="tipos-de-gaitas" class="bg-[#001F3F] text-white py-20 px-6 text-center">
+    <h3 class="text-4xl font-bold mb-12 text-yellow-400">¿Conoces los tipos de gaitas?</h3>
 
-    <form class="max-w-md mx-auto space-y-4">
-      <input type="text" placeholder="Tu nombre" class="w-full px-4 py-2 rounded-md text-black" required>
-      <input type="email" placeholder="Correo electrónico" class="w-full px-4 py-2 rounded-md text-black" required>
-      <select class="w-full px-4 py-2 rounded-md text-black">
-        <option>Curso Básico</option>
-        <option>Curso Intermedio</option>
-        <option>Curso Avanzado</option>
-        <option>Curso Infantil</option>
-        <option>Elaboración de Instrumento</option>
-      </select>
-      <a href="https://wa.me/573043415970?text=Hola!%20Quiero%20inscribirme%20al%20curso%20de%20gaita" 
-         target="_blank"
-         class="block bg-yellow-400 text-[#001F3F] px-6 py-3 rounded-md font-semibold hover:bg-yellow-300 transition">
-         Enviar por WhatsApp
-      </a>
-    </form>
+    <!-- Mensaje solo visible en responsive -->
+    <p class="text-gray-300 text-sm mb-8 md:hidden animate-pulse">✨ Toca una tarjeta para descubrir más</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+      <!-- Gaita Hembra -->
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front bg-pink-600 rounded-2xl p-8 flex flex-col justify-center items-center shadow-lg">
+            <img src="img/gaitahembra.png" alt="Gaita Hembra" class="w-40 h-48 mb-4 object-contain" />
+            <h4 class="text-2xl font-semibold">Gaita Hembra</h4>
+            <p class="text-base text-gray-100 mt-2">Melódica y dulce, guía el sonido del conjunto.</p>
+          </div>
+          <div class="flip-card-back bg-pink-700 rounded-2xl p-6 flex flex-col justify-center items-center">
+            <iframe class="rounded-lg w-full h-60" src="https://www.youtube.com/embed/XXXXXXXXXXX" title="Gaita Hembra" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gaita Macho -->
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front bg-blue-700 rounded-2xl p-8 flex flex-col justify-center items-center shadow-lg">
+            <img src="img/gaitamacho.png" alt="Gaita Macho" class="w-40 h-48 mb-4 object-contain" />
+            <h4 class="text-2xl font-semibold">Gaita Macho</h4>
+            <p class="text-base text-gray-100 mt-2">Profunda y rítmica, da base al acompañamiento.</p>
+          </div>
+          <div class="flip-card-back bg-blue-800 rounded-2xl p-6 flex flex-col justify-center items-center">
+            <iframe class="rounded-lg w-full h-60" src="https://www.youtube.com/embed/YYYYYYYYYYY" title="Gaita Macho" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gaita Corta -->
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front bg-green-700 rounded-2xl p-8 flex flex-col justify-center items-center shadow-lg">
+            <img src="img/gaitacorta.png" alt="Gaita Corta" class="w-40 h-48 mb-4 object-contain" />
+            <h4 class="text-2xl font-semibold">Gaita Corta</h4>
+            <p class="text-base text-gray-100 mt-2">Versátil y ágil, perfecta para improvisaciones.</p>
+          </div>
+          <div class="flip-card-back bg-green-800 rounded-2xl p-6 flex flex-col justify-center items-center">
+            <iframe class="rounded-lg w-full h-60" src="https://www.youtube.com/embed/ZZZZZZZZZZZ" title="Gaita Corta" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
+<!-- SECCIÓN CURSOS DE GAITA -->
+<section id="niveles" class="bg-gradient-to-b from-yellow-400 to-yellow-300 text-[#001F3F] py-20 px-6 text-center">
+  <h2 class="text-4xl font-bold mb-6">🎶 Elige tu nivel y aprende gaita en solo 4 clases</h2>
+  <p class="max-w-2xl mx-auto mb-12 text-lg text-[#001F3F]/80">
+    Cada curso está diseñado con metodología práctica y cultural para que disfrutes aprendiendo desde la primera nota.
+  </p>
 
-  <footer class="text-center py-6 text-gray-400 text-sm">
-    © 2025 Gaita Colombiana - Todos los derechos reservados
-  </footer>
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+
+    <!-- INICIACIÓN -->
+    <div class="bg-red-600 text-white rounded-2xl shadow-xl p-8 flex flex-col items-center hover:scale-105 transition-transform duration-300">
+      <i data-lucide="music" class="w-12 h-12 mb-4"></i>
+      <h3 class="text-2xl font-bold mb-2">Iniciación</h3>
+      <p class="text-lg font-semibold text-yellow-300 mb-3">$160.000</p>
+      <ul class="text-sm space-y-2 text-gray-100 text-left">
+        <li>• Historia del instrumento</li>
+        <li>• Morfología y escalas básicas</li>
+        <li>• Sonidos fundamentales</li>
+        <li>• 🎵 Aprende tu primer tema completo</li>
+      </ul>
+      <p class="mt-6 text-sm font-semibold bg-yellow-400 text-[#001F3F] px-4 py-2 rounded-lg">4 clases</p>
+    </div>
+
+    <!-- BÁSICO -->
+    <div class="bg-blue-700 text-white rounded-2xl shadow-xl p-8 flex flex-col items-center hover:scale-105 transition-transform duration-300">
+      <i data-lucide="book-open" class="w-12 h-12 mb-4"></i>
+      <h3 class="text-2xl font-bold mb-2">Básico</h3>
+      <p class="text-lg font-semibold text-yellow-300 mb-3">$200.000</p>
+      <ul class="text-sm space-y-2 text-gray-100 text-left">
+        <li>• Reconocimiento de estilos musicales</li>
+        <li>• Aprendizaje de obras tradicionales</li>
+        <li>• Coordinación rítmica y fraseo gaitero</li>
+        <li>• Dinámica grupal</li>
+      </ul>
+      <p class="mt-6 text-sm font-semibold bg-yellow-400 text-[#001F3F] px-4 py-2 rounded-lg">4 clases</p>
+    </div>
+
+    <!-- AVANZADO -->
+    <div class="bg-green-700 text-white rounded-2xl shadow-xl p-8 flex flex-col items-center hover:scale-105 transition-transform duration-300">
+      <i data-lucide="zap" class="w-12 h-12 mb-4"></i>
+      <h3 class="text-2xl font-bold mb-2">Avanzado</h3>
+      <p class="text-lg font-semibold text-yellow-300 mb-3">$260.000</p>
+      <ul class="text-sm space-y-2 text-gray-100 text-left">
+        <li>• Recursos técnicos y expresivos</li>
+        <li>• Patrones rítmicos y solos</li>
+        <li>• Inclusión en música general</li>
+        <li>• Grabación y presentación final</li>
+      </ul>
+      <p class="mt-6 text-sm font-semibold bg-yellow-400 text-[#001F3F] px-4 py-2 rounded-lg">4 clases</p>
+    </div>
+
+    <!-- PRÓXIMAMENTE -->
+    <div class="bg-[#001F3F] text-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-2 border-yellow-400 hover:scale-105 transition-transform duration-300">
+      <i data-lucide="star" class="w-12 h-12 text-yellow-400 mb-4 animate-pulse"></i>
+      <h3 class="text-2xl font-bold mb-2 text-yellow-400">Próximamente</h3>
+      <p class="text-base mb-4 text-gray-300">Talleres intensivos y clases maestras con gaiteros invitados</p>
+      <span class="text-yellow-300 font-semibold italic">¡Muy pronto disponible!</span>
+    </div>
+
+  </div>
+</section>
+<!-- INSCRIPCIÓN -->
+<section id="inscripcion" class="bg-[#001F3F] py-16 text-center">
+  <h3 class="text-2xl font-bold mb-4 text-yellow-400">Inscríbete ahora</h3>
+  <p class="mb-6 text-gray-300">Déjanos tus datos y tu cupo quedará registrado automáticamente.</p>
+
+  <!-- 🚫 SIN ACTION – para que NO salga la página blanca -->
+  <form id="miFormulario" class="max-w-md mx-auto space-y-4 bg-white p-6 rounded-xl shadow-lg text-left text-black">
+
+    <input type="text" name="codigo" placeholder="Código promocional (opcional)" class="w-full px-4 py-2 rounded-md border" />
+
+    <input type="text" name="nombre" placeholder="Tu nombre completo" class="w-full px-4 py-2 rounded-md border" required />
+
+    <input type="number" name="telefono" placeholder="Número de teléfono" class="w-full px-4 py-2 rounded-md border" required />
+
+    <input type="email" name="correo" placeholder="Correo electrónico" class="w-full px-4 py-2 rounded-md border" required />
+
+    <label class="text-black font-semibold block">¿Qué gaita te interesa?</label>
+    <select name="gaita" class="w-full px-4 py-2 rounded-md border" required>
+      <option value="">Seleccione…</option>
+      <option>Gaita Hembra</option>
+      <option>Gaita Macho</option>
+      <option>Gaita Corta</option>
+    </select>
+
+    <label class="text-black font-semibold block">Tipo de curso</label>
+    <select name="tipocurso" class="w-full px-4 py-2 rounded-md border" required>
+      <option value="">Seleccione…</option>
+      <option>Iniciación – Aprende tu primer tema</option>
+      <option>Básico – Escalas, técnica y obras iniciales</option>
+      <option>Avanzado – Recursos, patrones rítmicos e integración musical</option>
+    </select>
+
+    <input type="number" name="edad" placeholder="Edad" class="w-full px-4 py-2 rounded-md border" />
+
+   <label class="text-black font-semibold block">Pais</label>
+    <select name="pais" class="w-full px-4 py-2 rounded-md border" required>
+      <option value="">Seleccione…</option>
+      <option>Colombia</option>
+      <option>Exterior de Colombia</option>
+    </select>
+
+    <input type="text" name="ciudad" placeholder="Ciudad o Municipio" class="w-full px-4 py-2 rounded-md border" required />
+
+
+
+
+    <label class="text-black font-semibold block">Modalidad</label>
+    <select name="modalidad" class="w-full px-4 py-2 rounded-md border" required>
+      <option value="">Seleccione…</option>
+      <option>Presencial</option>
+      <option>Virtual</option>
+    </select>
+
+    <label class="text-black font-semibold block">Horario disponible</label>
+    <select name="horario" class="w-full px-4 py-2 rounded-md border" required>
+      <option value="">Seleccione…</option>
+      <option>Mañana</option>
+      <option>Tarde</option>
+      <option>Noche</option>
+    </select>
+
+    <button type="submit" class="w-full bg-yellow-400 text-[#001F3F] px-6 py-3 rounded-md font-semibold hover:bg-yellow-300 transition">
+      Inscribirme ahora
+    </button>
+  </form>
+</section>
+
+<!-- 🔥 SCRIPT ANTI-CORS + MENSAJE BONITO -->
+<script>
+document.getElementById("miFormulario").addEventListener("submit", async function(e) {
+  e.preventDefault(); // NO recargar
+
+  const url = "https://script.google.com/macros/s/AKfycby2Z_s_zjFuKdZCG4S9ddWHyrJ8Yl-3kaHptkXsJGu8ktxj-8aaB-WPF4Gs5u55WVzGdQ/exec"
+  const formData = new FormData(this);
+  // 🔒 PREVENIR DOBLE ENVÍO
+    const form = this;
+  const boton = form.querySelector("button[type='submit']");
+  boton.disabled = true;
+  boton.innerText = "Enviando...";
+  // Enviar datos
+  let respuesta = await fetch(url, {
+    method: "POST",
+    body: formData
+  });
+
+  // Intentar procesar JSON
+  let json = {};
+  try {
+    json = await respuesta.json();
+  } catch (err) {
+    json.status = "ok"; // Si no devuelve JSON, igual avanzamos
+  }
+
+  if (json.status === "ok") {
+    mostrarMensaje();
+  }
+});
+
+function mostrarMensaje() {
+  const modal = document.getElementById("modalExito");
+  modal.classList.remove("hidden");
+
+  document.getElementById("cerrarModalBtn").onclick = function() {
+    window.location.href = "index.html"; // <- cambia luego por tu dominio
+  };
+}
+</script>
+
+
+
+  <!-- FOOTER -->
+<!-- FOOTER -->
+<footer class="bg-gradient-to-b from-gray-900 to-black text-white py-16 px-6">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+
+    <!-- Imagen y redes sociales -->
+    <div class="flex flex-col items-center md:items-start text-center md:text-left">
+      <img src="img/docentes.png" alt="Andrés Blanco - Gaita Colombiana" class="w-72 h-auto rounded-2xl shadow-2xl mb-5 border-4 border-yellow-400">
+      
+      <h3 class="text-3xl font-bold text-yellow-400 mb-4">Andres Blanco Mercado</h3>
+
+      <!-- Redes Sociales -->
+      <div class="flex justify-center md:justify-start space-x-6 mt-2">
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/share/17VyatV7vs/" target="_blank" class="hover:text-yellow-400 transition transform hover:scale-110">
+          <i class="fa-brands fa-facebook text-3xl"></i>
+        </a>
+
+        <!-- WhatsApp -->
+        <a href="https://wa.me/573046605809" target="_blank" class="hover:text-green-400 transition transform hover:scale-110">
+          <i class="fa-brands fa-whatsapp text-3xl"></i>
+        </a>
+
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/escuelagaitacolombiana/" target="_blank" class="hover:text-pink-400 transition transform hover:scale-110">
+          <i class="fa-brands fa-instagram text-3xl"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Texto institucional -->
+    <div>
+      <h4 class="text-2xl font-semibold text-yellow-400 mb-4">Nuestra historia</h4>
+      <p class="text-gray-300 leading-relaxed text-justify">
+        <strong>Gaita Colombiana</strong> es más que una escuela: es un movimiento que late al ritmo de nuestras raíces.  
+        Fundada por <strong>Andrés Blanco</strong> — gaitero profesional, ingeniero de sistemas y apasionado por la cultura — esta iniciativa nació en <strong>Barranquilla</strong> con el propósito de 
+        <em>preservar y expandir la tradición de la gaita colombiana</em>.  
+        <br><br>
+        Con más de <strong>10 años de experiencia</strong> enseñando y tocando, Andrés fue reconocido como <strong>Mejor Gaitero en el Festival de Gaitas de Ovejas, Sucre 2025</strong> y es fundador del grupo 
+        <strong>Gaiteros de Barranquilla</strong>, símbolo del talento y orgullo del Caribe.  
+        <br><br>
+        Hoy, <strong>Gaita Colombiana</strong> sigue creciendo como comunidad de aprendizaje, cultura y pasión.  
+        Desde nuestras aulas hasta tus manos, te invitamos a descubrir que <span class="text-yellow-400 font-semibold">la gaita no solo se toca, se siente.</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Línea inferior -->
+  <div class="mt-12 border-t border-gray-700 pt-6 text-center text-gray-400 text-sm">
+    © 2025 Gaita Colombiana. Todos los derechos reservados.  
+    <br class="md:hidden"> Creado con ❤️ por la pasión gaitera.
+  </div>
+</footer>
+
+<!-- Font Awesome para íconos -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js" crossorigin="anonymous"></script>
+
+
+  <script>
+    // Activar íconos de Lucide
+    lucide.createIcons();
+
+    // Script del menú móvil con animación
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+      mobileMenu.classList.toggle("flex");
+      mobileMenu.classList.add("slide-down");
+    });
+  </script>
+
+  <!-- MODAL ÉXITO -->
+<div id="modalExito" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden">
+  <div class="bg-white rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl">
+    
+    <h2 class="text-3xl font-bold text-green-600 mb-3">¡Registro exitoso!</h2>
+
+    <p class="text-gray-700 mb-6">
+      Hemos recibido tu información correctamente.<br>
+      Muy pronto nos comunicaremos contigo. 🎶
+    </p>
+
+    <button id="cerrarModalBtn"
+            class="bg-yellow-400 hover:bg-yellow-300 text-[#001F3F] font-bold px-6 py-3 rounded-lg transition w-full">
+       Volver
+    </button>
+  </div>
+</div>
+
 </body>
 </html>
